@@ -24,13 +24,13 @@ pipeline{
                     }
             }
         }
-        stage('Pull and run in K8 cluster'){
-            steps{
-                script{
-
-                }
-            }
-        }
+//         stage('Pull and run in K8 cluster'){
+//             steps{
+//                 script{
+//
+//                 }
+//             }
+//         }
     }
 
 }
