@@ -20,7 +20,7 @@ pipeline{
                         withCredentials([string(credentialsId: 'dockerhubpass', variable: 'dockerhubpass')]) {
                             sh 'docker login -u anijames -p ${dockerhubpass}'
                         }
-                        sh 'docker push anijames/my-dockerk8:latest'
+                        sh 'docker push anijames/my-dockerk8-img:latest'
                     }
             }
         }
