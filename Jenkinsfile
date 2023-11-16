@@ -11,7 +11,7 @@ pipeline{
         }
         stage('Build image'){
             steps{
-                sh 'docker build -t anijames/my-dockerK8-img:latest .'
+                sh 'docker build -t anijames/my-dockerk8-img:latest .'
             }
         }
         stage('Push to dockerhub'){
@@ -20,7 +20,7 @@ pipeline{
                         withCredentials([string(credentialsId: 'dockerhubpass', variable: 'dockerhubpass')]) {
                             sh 'docker login -u anijames -p ${dockerhubpass}'
                         }
-                        sh 'docker push anijames/my-dockerK8:latest'
+                        sh 'docker push anijames/my-dockerk8:latest'
                     }
             }
         }
