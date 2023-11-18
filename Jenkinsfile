@@ -30,8 +30,8 @@ pipeline{
                 script{
                     withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
                         //sh 'export KUBE_CONFIG=$(pwd)/$KUBE_CONFIG'
-                        sh 'kubectl --kubeconfig=KUBE_CONFIG apply -f my-deployment,yaml'
-                        sh 'kubectl --kubeconfig=KUBE_CONFIG get pods'
+                        sh 'kubectl --kubeconfig=${KUBE_CONFIG} apply -f my-deployment,yaml'
+                        sh 'kubectl --kubeconfig=${KUBE_CONFIG} get pods'
                     }
                 }
             }
