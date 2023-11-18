@@ -27,20 +27,20 @@ pipeline{
                     }
             }
         }
-        stage('K8 credentials configuration'){
-            steps{
-                script{
-                    withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
-                        sh 'export KUBECONFIG=$(pwd)/$KUBE_CONFIG'
-                    }
-                }
-            }
-        }
+//         stage('K8 credentials configuration'){
+//             steps{
+//                 script{
+//                     withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
+//                         sh 'export KUBECONFIG=$(pwd)/$KUBE_CONFIG'
+//                     }
+//                 }
+//             }
+//         }
         stage('Run deployment file'){
             steps{
                 script{
-                    sh 'kubectl apply -f my-deployment,yaml'
-                    sh 'kubectl get pods'
+                    sh 'kubectl --kubeconfig=KUBE_CONFIG apply -f my-deployment,yaml'
+                    sh 'kubectl --kubeconfig=KUBE_CONFIG get pods'
                 }
             }
         }
