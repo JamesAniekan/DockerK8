@@ -33,6 +33,14 @@ pipeline{
                 }
             }
         }
+        stage('Run deployment file'){
+            steps{
+                script{
+                    sh 'kubectl apply -f my-deployment,yaml'
+                    sh 'kubectl get pods'
+                }
+            }
+        }
     }
 
 }
