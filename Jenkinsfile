@@ -3,6 +3,9 @@ pipeline{
     tools{
       maven '3.9.4'
     }
+    environment{
+        KUBE_CONFIG = credentials('my-k8-credentials')
+    }
     stages{
         stage('Build and package'){
             steps{
@@ -27,8 +30,8 @@ pipeline{
         stage('K8 credentials configuration'){
             steps{
                 script{
-                    withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBECONFIG')]){
-                        sh 'export KUBECONFIG=$(pwd)/$KUBECONFIG'
+                    withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
+                        sh 'export KUBECONFIG=$(pwd)/$KUBE_CONFIG'
                     }
                 }
             }
@@ -36,8 +39,8 @@ pipeline{
         stage('Run deployment file'){
             steps{
                 script{
-                    sh 'kubectl --kubeconfig=KUBECONFIG apply -f my-deployment,yaml'
-                    sh 'kubectl --kubeconfig=KUBECONFIG get pods'
+                    sh 'kubectl apply -f my-deployment,yaml'
+                    sh 'kubectl get pods'
                 }
             }
         }
