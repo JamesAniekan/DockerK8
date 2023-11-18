@@ -24,13 +24,15 @@ pipeline{
                     }
             }
         }
-//         stage('Pull and run in K8 cluster'){
-//             steps{
-//                 script{
-//
-//                 }
-//             }
-//         }
+        stage('K8 credentials configuration'){
+            steps{
+                script{
+                    withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBECONFIG')]){
+                        sh 'export KUBECONFIG=$(pwd)/$KUBECONFIG'
+                    }
+                }
+            }
+        }
     }
 
 }
