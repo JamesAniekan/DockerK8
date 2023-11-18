@@ -36,8 +36,8 @@ pipeline{
         stage('Run deployment file'){
             steps{
                 script{
-                    sh 'kubectl apply -f my-deployment,yaml'
-                    sh 'kubectl get pods'
+                    sh 'kubectl --kubeconfig=KUBECONFIG apply -f my-deployment,yaml'
+                    sh 'kubectl --kubeconfig=KUBECONFIG get pods'
                 }
             }
         }
