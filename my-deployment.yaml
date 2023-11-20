@@ -13,7 +13,7 @@ spec:
         app: my-docker-app
     spec:
       containers:
-        - name: my-dockerK8
+        - name: my-dockerk8
           image: anijames/my-dockerk8-img:latest
           ports:
              - containerPort: 8080
