@@ -16,7 +16,7 @@ spec:
         - name: my-dockerK8
           image: anijames/my-dockerk8-img:latest
           ports:
-            - containerPort:8080
+             - containerPort: 8080
 
 ---
 apiVersion: v1
