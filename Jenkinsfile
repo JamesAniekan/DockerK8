@@ -27,12 +27,15 @@ pipeline{
         }
         stage('K8 credentials configuration'){
             steps{
-                script{
-                    withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
-                        //sh 'export KUBE_CONFIG=$(pwd)/$KUBE_CONFIG'
-                        sh 'kubectl --kubeconfig=${KUBE_CONFIG} apply -f my-deployment,yaml'
-                        sh 'kubectl --kubeconfig=${KUBE_CONFIG} get pods'
-                    }
+//                 script{
+//                     withCredentials([file(credentialsId: 'my-k8-credentials', variable:'KUBE_CONFIG')]){
+//                         //sh 'export KUBE_CONFIG=$(pwd)/$KUBE_CONFIG'
+//                         sh 'kubectl --kubeconfig=${KUBE_CONFIG} apply -f my-deployment,yaml'
+//                         sh 'kubectl --kubeconfig=${KUBE_CONFIG} get pods'
+//                     }
+//                }
+                withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'my-k8-credentials', namespace: '', restrictKubeConfigAccess: false, serverUrl: 'https://192.168.49.2:8443') {
+                    sh 'kubectl apply -f my-deployment.yaml'
                 }
             }
         }
